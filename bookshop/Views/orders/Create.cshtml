@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer localizer
+@{Layout = "~/Views/Shared/_Layout1.cshtml";}
+@model bookshop.Models.book
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+     @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+    {
+        <link rel="stylesheet"
+              href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+              integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+              crossorigin="anonymous" />
+        //add your own files
+        <style>
+            table {
+                direction: rtl;
+            }
+        </style>
+    }
+<h1>@localizer["Create"]</h1>
+<hr />
+ <dl class="row">
+        <dt class = "col-sm-2">
+            @localizer["Id"]
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+
+        </dd>
+        
+        <dt class = "col-sm-2">
+            @localizer["title"]
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.title)
+        </dd>
+        <dt class = "col-sm-2">
+           @localizer["info"]
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.info)
+        </dd>
+        <dt class = "col-sm-2">
+             @localizer["bookquantity"]
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.bookquantity)
+        </dd>
+        <dt class = "col-sm-2">
+             @localizer["price"]
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.price )
+        </dd>
+       
+        <dt class = "col-sm-2">
+             @localizer["author"]
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.author)
+        </dd>
+               <dt>
+           @localizer["Pic"] 
+        </dt>
+        <dd>
+            <img src="~/images/@Model.imgfile" height="150" />
+            <br />@Model.imgfile
+
+        </dd>
+    </dl>
+
+
+<h4>@localizer["orders"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           <input type="hidden" name="bookId" value=@Model.Id />
+          
+            <div class="form-group">
+                <label for="quantity" class="control-label">@localizer["quantity"]</label>
+                <input name="quantity" class="form-control" />
+               
+            </div>
+           
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"> @localizer["buy"]  </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Books" asp-action="catalogue">@localizer["Back to Catalogue"]</a>
+
+</div>
+

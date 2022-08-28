@@ -1,0 +1,64 @@
+﻿@model IEnumerable<bookshop.Models.orders>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = "myorders";
+}
+@{Layout = "~/Views/Shared/_Layout1.cshtml";}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+     @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+    {
+        <link rel="stylesheet"
+              href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+              integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+              crossorigin="anonymous" />
+        //add your own files
+        <style>
+            table {
+                direction: rtl;
+            }
+        </style>
+    }
+<h1>@localizer["myorders"]</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               @localizer["bookId"]
+            </th>
+         
+            <th>
+                @localizer["quantity"]
+            </th>
+            <th>
+                @localizer["orderdate"]
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookId)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.orderdate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">@localizer["Edit"]</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">@localizer["Details"]</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">@localizer["Delete"]</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

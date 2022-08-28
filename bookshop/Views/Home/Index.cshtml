@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IOptions<RequestLocalizationOptions> locOptions
+@inject IViewLocalizer localizer
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+ 
+<div class="text-center">
+    <h1 class="display-4">@localizer["Welcome To Your Bookshop"]</h1>
+   
+</div>
+<table class="table mt-4">
+    <tr>
+        <td>@localizer["Culture"]</td>
+        <td>
+            @requestCulture.RequestCulture.Culture.Name
+        </td>
+    </tr>
+    <tr>
+        <td>@localizer["Date"]</td>
+        <td>@DateTime.Now.ToLongDateString()</td>
+    </tr>
+   
+</table>
